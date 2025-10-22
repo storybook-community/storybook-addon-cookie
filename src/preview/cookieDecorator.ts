@@ -22,7 +22,9 @@ export const cookieDecorator = (
 
   if (flag) {
     setFlag(false)
-    if (!parameters) return storyFn()
+    if (!parameters) {
+      return storyFn()
+    }
 
     if (parameters[PARAM_PRESERVE_KEY] !== true) {
       clearCookies()
