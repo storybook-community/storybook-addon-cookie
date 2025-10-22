@@ -1,8 +1,8 @@
-import React from "react";
-import { addons, types } from "storybook/manager-api";
+import React from 'react'
+import { addons, types } from 'storybook/manager-api'
 
-import { ADDON_ID, ADDON_TITLE, PANEL_ID } from './constants';
-import { Panel } from "./manager/Panel";
+import { ADDON_ID, ADDON_TITLE, PANEL_ID } from './constants'
+import { Panel } from './manager/Panel'
 
 addons.register(ADDON_ID, () => {
   addons.add(PANEL_ID, {
@@ -10,5 +10,5 @@ addons.register(ADDON_ID, () => {
     title: ADDON_TITLE,
     match: ({ viewMode }) => viewMode === 'story',
     render: ({ active }) => <Panel active={active} />,
-  });
-});
+  })
+})
