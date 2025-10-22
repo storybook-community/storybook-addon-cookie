@@ -31,7 +31,6 @@
   </p>
 </div>
 
-
 <p align="center">
   <img src="./assets/demo.gif" align="center" alt="demo"/>
 </p>
@@ -39,7 +38,7 @@
 > [!NOTE]
 > This is a fork maintained by the community to provide support for Storybook 10 and beyond. This addon was originally developed by 김현우 (Kim HyunWoo).
 
-------
+---
 
 ## Install
 
@@ -60,7 +59,7 @@ export default {
     // ..other addons
     '@storybook-community/storybook-addon-cookie',
   ],
-};
+}
 ```
 
 ## Usage
@@ -75,19 +74,16 @@ export default {
   title: 'Example',
 }
 
-
 export const WithCookie = {
   parameters: {
     cookie: {
       prop: 'value',
     },
-  }
+  },
 }
 ```
 
-
 ### Cookie encoding
-
 
 If you want to encode the value of cookies you've set in `parameters` or in the panel, you can use the `cookieEncoding` parameter. This can be done globally, per-component or per-story.
 
@@ -116,7 +112,7 @@ export const PreserveCookies: Story = {
     },
     cookiePreserve: true,
   },
-};
+}
 ```
 
 This option defaults to `false`.
@@ -139,14 +135,13 @@ export default {
       globallyShared: 'value',
     },
   },
-};
+}
 ```
 
 ## Previous Storybook versions
 
-* Storybook 9: unsupported
-* Storybook 6-8: use `storybook-addon-cookie` from [hwookim](https://github.com/hwookim/storybook-addon-cookie) instead
-
+- Storybook 9: unsupported
+- Storybook 6-8: use `storybook-addon-cookie` from [hwookim](https://github.com/hwookim/storybook-addon-cookie) instead
 
 ## Contributing
 
