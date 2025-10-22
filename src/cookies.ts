@@ -1,5 +1,31 @@
 import type { Cookie } from './types'
 
+export function getExistingCookies(): Cookie {
+  return document.cookie.split(';').reduce((acc: Cookie, cookieStr) => {
+    const [name, ...rest] = cookieStr.split('=')
+    const value = rest.join('=')
+    if (name) {
+      acc[name.trim()] = value
+    }
+    return acc
+  }, {})
+}
+
+export let existingCookies: Cookie = {}
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
+        existingCookies = getExistingCookies()
+      },
+      { once: true },
+    )
+  } else {
+    existingCookies = getExistingCookies()
+  }
+}
+
 export function setCookie(name: string, value: string, encoding?: boolean) {
   let cookieValue
   if (typeof value === 'string') {

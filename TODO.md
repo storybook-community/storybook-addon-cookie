@@ -1,4 +1,1 @@
-- [ ] Add fork notice to README
 - [ ] Update README
-- [ ] Add 4.0.1 tag
-- [ ] Photo by Julissa Capdevilla Unsplash License

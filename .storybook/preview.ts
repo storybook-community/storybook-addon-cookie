@@ -8,6 +8,9 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    cookie: {
+      global: 'This is a global cookie!',
+    },
   },
   initialGlobals: {
     background: { value: 'light' },
