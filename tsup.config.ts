@@ -1,42 +1,29 @@
-import { defineConfig, type Options } from "tsup";
+import { defineConfig, type Options } from 'tsup'
 
-const NODE_TARGET = "node20.19"; // Minimum Node version supported by Storybook 10
+const NODE_TARGET = 'node20.19' // Minimum Node version supported by Storybook 10
 
-export default defineConfig(async (options) => {
-  // reading the three types of entries from package.json, which has the following structure:
-  // {
-  //  ...
-  //   "bundler": {
-  //     "managerEntries": ["./src/manager.ts"],
-  //     "previewEntries": ["./src/preview.ts"]
-  //     "nodeEntries": ["./src/preset.ts"]
-  //   }
-  // }
+export default defineConfig(async () => {
   const packageJson = (
-    await import("./package.json", { with: { type: "json" } })
-  ).default;
+    await import('./package.json', { with: { type: 'json' } })
+  ).default
 
   const {
-    bundler: { managerEntries = [], previewEntries = [], nodeEntries = [] },
-  } = packageJson;
+    bundler: { managerEntries = [], previewEntries = [] },
+  } = packageJson
 
   const commonConfig: Options = {
-    /*
-     keep this line commented until https://github.com/egoist/tsup/issues/1270 is resolved
-     clean: options.watch ? false : true,
-    */
     clean: false,
-    format: ["esm"],
+    format: ['esm'],
     treeshake: true,
     splitting: true,
     /*
      The following packages are provided by Storybook and should always be externalized
      Meaning they shouldn't be bundled with the addon, and they shouldn't be regular dependencies either
     */
-    external: ["react", "react-dom", "@storybook/icons"],
-  };
+    external: ['react', 'react-dom', '@storybook/icons'],
+  }
 
-  const configs: Options[] = [];
+  const configs: Options[] = []
 
   /*
    manager entries are entries meant to be loaded into the manager UI
@@ -47,9 +34,9 @@ export default defineConfig(async (options) => {
     configs.push({
       ...commonConfig,
       entry: managerEntries,
-      platform: "browser",
-      target: "esnext", // we can use esnext for manager entries since Storybook will bundle the addon's manager entries again anyway
-    });
+      platform: 'browser',
+      target: 'esnext', // we can use esnext for manager entries since Storybook will bundle the addon's manager entries again anyway
+    })
   }
 
   /*
@@ -61,25 +48,11 @@ export default defineConfig(async (options) => {
     configs.push({
       ...commonConfig,
       entry: previewEntries,
-      platform: "browser",
-      target: "esnext", // we can use esnext for preview entries since the builders will bundle the addon's preview entries again anyway
+      platform: 'browser',
+      target: 'esnext', // we can use esnext for preview entries since the builders will bundle the addon's preview entries again anyway
       dts: true,
-    });
+    })
   }
 
-  /*
-   node entries are entries meant to be used in node-only
-   this is useful for presets, which are loaded by Storybook when setting up configurations
-   they won't have types generated for them as they're usually loaded automatically by Storybook
-  */
-  if (nodeEntries.length) {
-    configs.push({
-      ...commonConfig,
-      entry: nodeEntries,
-      platform: "node",
-      target: NODE_TARGET,
-    });
-  }
-
-  return configs;
-});
+  return configs
+})

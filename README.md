@@ -45,7 +45,7 @@ module.exports = {
     // ..other addons
     'storybook-addon-cookie',
   ],
-};
+}
 ```
 
 ## Usage
@@ -58,18 +58,18 @@ Or control cookie by addon panel.
 export default {
   component: Example,
   title: 'Example',
-};
+}
 
-const Template = () => <Example />;
+const Template = () => <Example />
 
-export const WithCookie = Template.bind({});
+export const WithCookie = Template.bind({})
 WithCookie.parameters = {
   cookie: {
     test: 'TEST!',
   },
-};
+}
 
-export const WithOutCookie = Template.bind({});
+export const WithOutCookie = Template.bind({})
 ```
 
 Each Story has independent cookie.

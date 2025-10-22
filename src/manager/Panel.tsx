@@ -1,54 +1,54 @@
-import React, { memo, useEffect, useState } from "react";
-import { AddonPanel } from "storybook/internal/components";
-import { Button } from "storybook/internal/components";
-import { styled } from "storybook/theming";
+import React, { memo, useEffect, useState } from 'react'
+import { AddonPanel } from 'storybook/internal/components'
+import { Button } from 'storybook/internal/components'
+import { styled } from 'storybook/theming'
 
-import { useGlobals, useParameter } from 'storybook/manager-api';
-import { TrashIcon } from '@storybook/icons';
-import { ObjectControl } from '@storybook/addon-docs/blocks';
+import { useGlobals, useParameter } from 'storybook/manager-api'
+import { TrashIcon } from '@storybook/icons'
+import { ObjectControl } from '@storybook/addon-docs/blocks'
 
-import { PARAM_ENCODING_KEY, PARAM_KEY } from '../constants';
-import { clearCookies, setCookies } from "../cookies";
-import type { Cookie } from '../types';
+import { PARAM_ENCODING_KEY, PARAM_KEY } from '../constants'
+import { clearCookies, setCookies } from '../cookies'
+import type { Cookie } from '../types'
 
 interface PanelProps {
-  active?: boolean;
+  active?: boolean
 }
 
 export const RequestDataButton = styled(Button)({
-  marginTop: "1rem",
-});
+  marginTop: '1rem',
+})
 
 export const PanelContent: React.FC = () => {
-  const defaultCookie = useParameter<Cookie>(PARAM_KEY, {});
-  const encoding = useParameter<boolean>(PARAM_ENCODING_KEY, false);
+  const defaultCookie = useParameter<Cookie>(PARAM_KEY, {})
+  const encoding = useParameter<boolean>(PARAM_ENCODING_KEY, false)
 
-  const [value, setValue] = useState<Cookie>();
-  const [globals, updateGlobals] = useGlobals();
+  const [value, setValue] = useState<Cookie>()
+  const [globals, updateGlobals] = useGlobals()
 
   const updateCookieValue = (newValue: Cookie | null) => {
-    setValue(newValue ?? {});
-    clearCookies();
+    setValue(newValue ?? {})
+    clearCookies()
     if (newValue) {
-      setCookies(newValue, encoding);
+      setCookies(newValue, encoding)
     }
-    updateGlobals({ ...globals });
-  };
+    updateGlobals({ ...globals })
+  }
 
   useEffect(() => {
     if (!defaultCookie && !value) {
-      return;
+      return
     }
-    updateCookieValue(defaultCookie);
-  }, [defaultCookie, encoding]);
+    updateCookieValue(defaultCookie)
+  }, [defaultCookie, encoding])
 
   const handleChange = (newValue: Cookie) => {
-    updateCookieValue(newValue);
-  };
+    updateCookieValue(newValue)
+  }
 
   const handleClear = () => {
-    updateCookieValue(null);
-  };
+    updateCookieValue(null)
+  }
 
   return (
     <div style={{ padding: '10px 20px' }}>
@@ -62,14 +62,13 @@ export const PanelContent: React.FC = () => {
         value={value ?? {}}
       />
     </div>
-  );
-};
+  )
+}
 
-export const Panel: React.FC<PanelProps> = memo(function MyPanel(props) {
-
+export const Panel = memo(function MyPanel({ active }: PanelProps) {
   return (
-    <AddonPanel active={props.active ?? false}>
+    <AddonPanel active={active ?? false}>
       <PanelContent />
     </AddonPanel>
-  );
-});
+  )
+})

@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export default function Demo(): JSX.Element {
-  return <>{document.cookie || "There's nothing!"}</>;
+  return <>{document.cookie || "There's nothing!"}</>
 }
