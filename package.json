@@ -1,24 +1,102 @@
 {
-  "name": "storybook-addon-cookie",
-  "private": true,
-  "repository": "git@github.com:hwookim/storybook-addon-cookie.git",
-  "workspaces": [
-    "packages/*"
+  "name": "@storybook-community/storybook-addon-cookie",
+  "version": "4.0.1",
+  "description": "Storybook addon for setting document.cookie",
+  "author": "hwookim <hwookim.dev@gmail.com>",
+  "keywords": [
+    "storybook-addon",
+    "cookie",
+    "mocking",
+    "data-state"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybook-community/storybook-addon-cookie"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./preview": {
+      "types": "./dist/preview.d.ts",
+      "default": "./dist/preview.js"
+    },
+    "./preset": "./dist/preset.js",
+    "./manager": "./dist/manager.js",
+    "./manager-helpers": "./dist/manager-helpers.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "engines": {
+    "node": ">=22.19.0",
+    "pnpm": ">=10.18.3"
+  },
   "scripts": {
-    "dev-addon": "yarn workspace storybook-addon-cookie build:watch",
-    "build-addon": "yarn workspace storybook-addon-cookie build",
-    "storybook": "yarn workspace demo storybook",
-    "build-storybook": "yarn build-addon && yarn workspace demo build-storybook"
+    "prebuild": "node -e \"fs.rmSync('./dist', { recursive: true, force: true })\"",
+    "build": "tsup",
+    "build-storybook": "storybook build",
+    "build:watch": "pnpm run build -- --watch",
+    "prerelease": "zx scripts/prepublish-checks.js",
+    "release": "pnpm run build && auto shipit",
+    "start": "run-p build:watch \"storybook --quiet\"",
+    "storybook": "storybook dev -p 6006",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "infer-owner": "^1.0.4",
-    "lerna": "^8.1.9",
-    "prettier": "^3.3.3"
+    "@storybook/addon-docs": "next",
+    "@storybook/icons": "^1.4.0",
+    "@storybook/react-vite": "next",
+    "@types/node": "^20",
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.21",
+    "@vitejs/plugin-react": "^4.7.0",
+    "auto": "^11.3.0",
+    "boxen": "^8.0.1",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "^3.6.2",
+    "prompts": "^2.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "next",
+    "ts-dedent": "^2.2.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.5",
+    "zx": "^8.7.1"
+  },
+  "peerDependencies": {
+    "@storybook/addon-docs": "^10.0.0",
+    "storybook": "^10.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "managerEntries": [
+      "src/manager.tsx",
+      "src/manager-helpers.tsx"
+    ],
+    "previewEntries": [
+      "src/preview.ts",
+      "src/index.ts"
+    ],
+    "nodeEntries": [
+      "src/preset.ts"
+    ]
+  },
+  "storybook": {
+    "displayName": "Cookie",
+    "supportedFrameworks": [
+      "supported-frameworks"
+    ],
+    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
 }
