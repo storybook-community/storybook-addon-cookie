@@ -64,7 +64,7 @@ export default {
 
 ## Usage
 
-You can preset a cookie object through the `cookie` [parameter](https://storybook.js.org/docs/writing-stories/parameters). Each story has independant cookies, even if they are set via a global or component parameter.
+You can preset a cookie object through the `cookie` [parameter](https://storybook.js.org/docs/writing-stories/parameters). Each story has independent cookies, even if they are set via a global or component parameter.
 
 You can manually edit or input a cookie object in the 'Cookie' addon panel. Those changes are not preserved on reload.
 
