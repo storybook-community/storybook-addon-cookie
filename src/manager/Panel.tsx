@@ -47,7 +47,7 @@ export const PanelContent = () => {
     return preserveCookies
       ? { ...existingCookies, ...parameterCookie }
       : parameterCookie
-  }, [parameterCookie, preserveCookies, existingCookies])
+  }, [parameterCookie, preserveCookies])
 
   const [value, setValue] = useState<Cookie>()
   const [globals, updateGlobals] = useGlobals()
