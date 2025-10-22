@@ -1,7 +1,7 @@
 {
   "name": "@storybook-community/storybook-addon-cookie",
-  "version": "4.0.1",
-  "description": "Storybook addon for setting document.cookie",
+  "version": "0.0.0-semantically-released",
+  "description": "Set document.cookie in your stories.",
   "author": "hwookim <hwookim.dev@gmail.com>",
   "keywords": [
     "storybook-addon",
@@ -24,9 +24,7 @@
       "types": "./dist/preview.d.ts",
       "default": "./dist/preview.js"
     },
-    "./preset": "./dist/preset.js",
     "./manager": "./dist/manager.js",
-    "./manager-helpers": "./dist/manager-helpers.js",
     "./package.json": "./package.json"
   },
   "files": [
@@ -40,19 +38,29 @@
     "pnpm": ">=10.18.3"
   },
   "scripts": {
-    "prebuild": "node -e \"fs.rmSync('./dist', { recursive: true, force: true })\"",
     "build": "tsup",
     "build-storybook": "storybook build",
-    "build:watch": "pnpm run build -- --watch",
+    "build:watch": "pnpm build --watch",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm lint --fix",
+    "pack": "pnpm pack --out storybook-addon-cookie-$(date +%s).tgz",
+    "prebuild": "node -e \"fs.rmSync('./dist', { recursive: true, force: true })\"",
     "prerelease": "zx scripts/prepublish-checks.js",
-    "release": "pnpm run build && auto shipit",
+    "release": "pnpm build && pnpm semantic-release",
+    "release:canary": "pnpm build && auto canary",
     "start": "run-p build:watch \"storybook --quiet\"",
     "storybook": "storybook dev -p 6006",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "@storybook/icons": "^1.4.0"
+  },
   "devDependencies": {
+    "@commitlint/config-conventional": "^20.0.0",
+    "@eslint/js": "^9.36.0",
     "@storybook/addon-docs": "next",
-    "@storybook/icons": "^1.4.0",
     "@storybook/react-vite": "next",
     "@types/node": "^20",
     "@types/react": "^18.2.65",
@@ -60,15 +68,26 @@
     "@vitejs/plugin-react": "^4.7.0",
     "auto": "^11.3.0",
     "boxen": "^8.0.1",
+    "commitlint": "^20.0.0",
+    "dedent": "^1.7.0",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
     "prompts": "^2.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "semantic-release": "^24.2.9",
     "storybook": "next",
     "ts-dedent": "^2.2.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.46.2",
     "vite": "^7.0.5",
     "zx": "^8.7.1"
   },
@@ -77,19 +96,17 @@
     "storybook": "^10.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
   },
   "bundler": {
     "managerEntries": [
-      "src/manager.tsx",
-      "src/manager-helpers.tsx"
+      "src/manager.tsx"
     ],
     "previewEntries": [
       "src/preview.ts",
       "src/index.ts"
-    ],
-    "nodeEntries": [
-      "src/preset.ts"
     ]
   },
   "storybook": {
@@ -97,6 +114,6 @@
     "supportedFrameworks": [
       "supported-frameworks"
     ],
-    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+    "icon": "https://raw.githubusercontent.com/storybook-community/storybook-addon-cookie/main/static/icon.png"
   }
 }
