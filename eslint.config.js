@@ -27,7 +27,11 @@ export default [
   {
     settings: {
       react: {
-        version: 'detect',
+        // eslint-plugin-react@7.37.5 does not support eslint 10: its
+        // 'detect' code path calls the removed context.getFilename() API
+        // (see resolveBasedir in lib/util/version.js). Pinning an explicit
+        // version avoids that path. Revisit once the plugin supports eslint 10.
+        version: '19',
       },
     },
   },
