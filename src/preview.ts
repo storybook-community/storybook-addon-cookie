@@ -1,9 +1,9 @@
 import type { ProjectAnnotations, Renderer } from 'storybook/internal/types'
 
-import { cookieDecorator } from './preview/cookieDecorator'
+import { cookieBeforeEach } from './preview/cookieBeforeEach'
 
 const preview: ProjectAnnotations<Renderer> = {
-  decorators: [cookieDecorator],
+  beforeEach: cookieBeforeEach,
 }
 
 export default preview
