@@ -1,37 +1,36 @@
+import preview from '../../.storybook/preview'
 import Demo from './Demo'
-import type { Meta } from '@storybook/react-vite'
 
-const meta: Meta<typeof Demo> = {
+const meta = preview.meta({
   title: 'Example/AlwaysPreserve',
   component: Demo,
   parameters: {
     cookiePreserve: true,
   },
-}
-export default meta
+})
 
-export const One = {
+export const One = meta.story({
   parameters: {
     cookie: {
       example: 'Value One',
     },
   },
-}
+})
 
-export const Two = {
+export const Two = meta.story({
   parameters: {
     cookie: {
       example: 'Value Two',
     },
   },
-}
+})
 
-export const Three = {
+export const Three = meta.story({
   parameters: {
     cookie: {
       example: 'Value Three',
     },
   },
-}
+})
 
-export const Unset = {}
+export const Unset = meta.story()

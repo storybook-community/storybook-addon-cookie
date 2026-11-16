@@ -2,9 +2,10 @@ import { fileURLToPath } from 'node:url'
 
 /**
  * to load the built addon in this test Storybook
+ * preview annotations are registered in .storybook/preview.ts with definePreview
  */
 export function previewAnnotations(entry = []) {
-  return [...entry, fileURLToPath(import.meta.resolve('../dist/preview.js'))]
+  return entry
 }
 
 export function managerEntries(entry = []) {

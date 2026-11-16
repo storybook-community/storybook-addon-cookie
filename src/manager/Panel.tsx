@@ -13,7 +13,7 @@ import { ObjectControl } from '@storybook/addon-docs/blocks'
 import { PARAM_ENCODING_KEY, PARAM_KEY, PARAM_PRESERVE_KEY } from '../constants'
 import { clearCookies, existingCookies, setCookies } from '../cookies'
 import type { Cookie } from '../types'
-import { styled } from 'storybook/theming'
+import { styled } from 'storybook/theming/emotion'
 
 interface PanelProps {
   active?: boolean
@@ -99,6 +99,7 @@ export const PanelContent = () => {
             variant="ghost"
             padding="small"
             size="small"
+            ariaLabel="Clear cookies"
             onClick={handleClear}
           >
             <DeleteIcon />
@@ -108,6 +109,7 @@ export const PanelContent = () => {
             variant="ghost"
             padding="small"
             size="small"
+            ariaLabel="Reset cookies"
             onClick={handleReset}
           >
             <SweepIcon />
