@@ -53,14 +53,6 @@ export const PanelContent = () => {
   const [globals, updateGlobals] = useGlobals()
 
   const updateCookieValue = (newValue: Cookie | null, forceClear = false) => {
-    console.log(
-      'clearing, forceClear:',
-      forceClear,
-      'preserve:',
-      preserveCookies,
-      'newValue:',
-      newValue,
-    )
     setValue(newValue ?? {})
 
     if (forceClear || preserveCookies !== true) {
