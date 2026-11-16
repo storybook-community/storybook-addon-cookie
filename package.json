@@ -104,7 +104,7 @@
       "src/index.ts"
     ]
   },
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@12.21.0",
   "engines": {
     "node": ">=22.19.0"
   },
