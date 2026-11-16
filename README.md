@@ -42,7 +42,13 @@
 
 ## Install
 
-### Install addon
+This addon requires Storybook 11. Run the following command to install the addon and register it in your Storybook configuration:
+
+```sh
+npx storybook add @storybook-community/storybook-addon-cookie
+```
+
+### Manual install
 
 Install the addon:
 
@@ -50,16 +56,36 @@ Install the addon:
 npm i -D @storybook-community/storybook-addon-cookie
 ```
 
-Load the addon in your Storybook config:
+Register it in your `.storybook/main.ts` file:
 
 ```ts
 // .storybook/main.ts
-export default {
+
+// Replace your-framework with the framework you are using (e.g., react-vite, nextjs-vite)
+import { defineMain } from '@storybook/your-framework/node'
+
+export default defineMain({
+  // ...rest of config
   addons: [
     // ..other addons
     '@storybook-community/storybook-addon-cookie',
   ],
-}
+})
+```
+
+Then register the addon's preview annotations in your `.storybook/preview.ts` file:
+
+```ts
+// .storybook/preview.ts
+
+// Replace your-framework with the framework you are using (e.g., react-vite, nextjs-vite)
+import { definePreview } from '@storybook/your-framework'
+import addonCookie from '@storybook-community/storybook-addon-cookie'
+
+export default definePreview({
+  // ...rest of preview
+  addons: [addonCookie()],
+})
 ```
 
 ## Usage
@@ -69,33 +95,35 @@ You can preset a cookie object through the `cookie` [parameter](https://storyboo
 You can manually edit or input a cookie object in the 'Cookie' addon panel. Those changes are not preserved on reload.
 
 ```tsx
-export default {
-  component: Example,
-  title: 'Example',
-}
+import preview from '../.storybook/preview'
+import { Example } from './Example'
 
-export const WithCookie = {
+const meta = preview.meta({
+  component: Example,
+})
+
+export const WithCookie = meta.story({
   parameters: {
     cookie: {
       prop: 'value',
     },
   },
-}
+})
 ```
 
 ### Cookie encoding
 
 If you want to encode the value of cookies you've set in `parameters` or in the panel, you can use the `cookieEncoding` parameter. This can be done globally, per-component or per-story.
 
-```jsx
-export const WithEncodedCookie: Story = {
+```tsx
+export const WithEncodedCookie = meta.story({
   parameters: {
     cookie: {
       prop: 'value',
     },
     cookieEncoding: true,
   },
-};
+})
 ```
 
 This option defaults to `false`.
@@ -105,14 +133,14 @@ This option defaults to `false`.
 If you want to use cookies that existed prior to loading the story, on top of those defined in `parameters`, you can set the `cookiePreserve` parameter.
 
 ```tsx
-export const PreserveCookies: Story = {
+export const PreserveCookies = meta.story({
   parameters: {
     cookie: {
       prop: 'value',
     },
     cookiePreserve: true,
   },
-}
+})
 ```
 
 This option defaults to `false`.
@@ -129,17 +157,19 @@ This option defaults to `false`.
 ```ts
 // .storybook/preview.ts
 
-export default {
+export default definePreview({
+  // ...rest of preview
   parameters: {
     cookie: {
       globallyShared: 'value',
     },
   },
-}
+})
 ```
 
 ## Previous Storybook versions
 
+- Storybook 10: use version 5.x of this addon
 - Storybook 9: unsupported
 - Storybook 6-8: use `storybook-addon-cookie` from [hwookim](https://github.com/hwookim/storybook-addon-cookie) instead
 
