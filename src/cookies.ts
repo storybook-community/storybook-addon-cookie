@@ -1,4 +1,4 @@
-import type { Cookie } from './types'
+import type { Cookie, CookieValue } from './types'
 
 export function getExistingCookies(): Cookie {
   return document.cookie.split(';').reduce((acc: Cookie, cookieStr) => {
@@ -26,7 +26,11 @@ if (typeof document !== 'undefined') {
   }
 }
 
-export function setCookie(name: string, value: string, encoding?: boolean) {
+export function setCookie(
+  name: string,
+  value: CookieValue,
+  encoding?: boolean,
+) {
   let cookieValue
   if (typeof value === 'string') {
     cookieValue = encoding ? encodeURIComponent(value) : value
@@ -40,7 +44,7 @@ export function setCookie(name: string, value: string, encoding?: boolean) {
 }
 
 export function setCookies(cookie: Cookie, encoding?: boolean) {
-  const entries: [string, string][] = Object.entries(cookie)
+  const entries: [string, CookieValue][] = Object.entries(cookie)
   entries.forEach(([name, value]) => setCookie(name, value, encoding))
 }
 

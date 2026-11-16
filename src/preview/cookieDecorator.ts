@@ -5,12 +5,12 @@ import type {
 } from 'storybook/internal/types'
 import { useState } from 'storybook/preview-api'
 
-import type { CookieParameter } from '../types'
+import type { CookieParameters } from '../types'
 import { clearCookies, setCookies } from '../cookies'
 import { PARAM_KEY, PARAM_PRESERVE_KEY } from '../constants'
 
 export interface DecoratorContext extends StoryContext<Renderer> {
-  parameters: StoryContext['parameters'] & CookieParameter
+  parameters: StoryContext['parameters'] & CookieParameters
 }
 
 // Not calling decorator logic
