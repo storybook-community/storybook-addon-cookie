@@ -48,6 +48,8 @@ This addon requires Storybook 11. Run the following command to install the addon
 npx storybook add @storybook-community/storybook-addon-cookie
 ```
 
+Stories written in [CSF 4](https://storybook.js.org/docs/writing-stories/csf), the default story format since Storybook 11, get type-checked `cookie`, `cookieEncoding` and `cookiePreserve` parameters.
+
 ### Manual install
 
 Install the addon:
@@ -73,7 +75,7 @@ export default defineMain({
 })
 ```
 
-Then register the addon's preview annotations in your `.storybook/preview.ts` file:
+Then register the addon's preview annotations in your `.storybook/preview.ts` file, so that TypeScript knows about the addon's parameters:
 
 ```ts
 // .storybook/preview.ts
@@ -110,6 +112,8 @@ export const WithCookie = meta.story({
   },
 })
 ```
+
+String values are set as is. Other values, such as numbers or objects, are serialized with `JSON.stringify`.
 
 ### Cookie encoding
 
