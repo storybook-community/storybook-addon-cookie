@@ -31,8 +31,8 @@
   "files": [
     "dist/**/*",
     "README.md",
-    "*.js",
-    "*.d.ts"
+    "manager.js",
+    "preview.js"
   ],
   "scripts": {
     "build": "tsup",
