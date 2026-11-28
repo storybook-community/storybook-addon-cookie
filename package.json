@@ -88,8 +88,8 @@
     "zx": "^8.8.5"
   },
   "peerDependencies": {
-    "@storybook/addon-docs": "^11.0.0",
-    "storybook": "^11.0.0"
+    "@storybook/addon-docs": "^11.0.0-0",
+    "storybook": "^11.0.0-0"
   },
   "publishConfig": {
     "access": "public",
