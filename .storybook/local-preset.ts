@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 
 /**
  * to load the built addon in this test Storybook
- * preview annotations are registered in .storybook/preview.ts with definePreview
+ * preview annotations are loaded from source in .storybook/preview.ts with definePreview
  */
 export function previewAnnotations(entry = []) {
   return entry
