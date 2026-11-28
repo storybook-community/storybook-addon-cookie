@@ -46,7 +46,6 @@
     "prebuild": "node -e \"fs.rmSync('./dist', { recursive: true, force: true })\"",
     "prerelease": "zx scripts/prepublish-checks.js",
     "release": "pnpm build && pnpm semantic-release",
-    "release:canary": "pnpm build && auto canary",
     "start": "run-p build:watch \"storybook --quiet\"",
     "storybook": "storybook dev -p 6006",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -62,7 +61,6 @@
     "@types/react-dom": "^19.3.0",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitejs/plugin-react": "^6.3.0",
-    "auto": "^11.3.6",
     "boxen": "^9.0.0",
     "commitlint": "^21.2.4",
     "dedent": "^1.7.2",
