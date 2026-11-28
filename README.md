@@ -206,7 +206,7 @@ This project uses PNPM as a package manager.
 - `pnpm start` starts the local Storybook
 - `pnpm build` builds and packages the addon code
 - `pnpm pack` makes a local tarball to be used as a NPM dependency elsewhere
-- `pnpm test` runs unit tests
+- `pnpm test` runs the unit tests and the story tests (run `pnpm exec playwright install chromium` once first)
 
 ### Migrating to a later Storybook version
 
